@@ -15,6 +15,12 @@ import org.bukkit.event.player.PlayerChatEvent;
  */
 public class Events implements Listener {
 
+    private final static Events instance = new Events();
+
+    public static Events getInstance() {
+        return instance;
+    }
+
     @EventHandler
     public void InventoryCloseEvent(InventoryCloseEvent e) {
         new CloseGUI().onCloseInv(e);
