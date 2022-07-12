@@ -1,6 +1,7 @@
 package com.happiergore.menusapi;
 
 import com.happiergore.menusapi.ItemsTypes.Behaviour;
+import com.happiergore.menusapi.Utils.ConsoleUtils;
 import com.happiergore.menusapi.Utils.PlayerUtils;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +15,6 @@ import org.bukkit.inventory.ItemStack;
 
 /**
  *
- * 
  * @author HappierGore
  */
 public abstract class GUI implements InventoryHolder {
@@ -26,6 +26,7 @@ public abstract class GUI implements InventoryHolder {
     private final Map<Integer, Behaviour> items = new HashMap<>();
     private final PlayerUtils player;
     public final String INVENTORY_TITLE;
+    private final ConsoleUtils console = new ConsoleUtils();
 
     public GUI(Player player, String inventoryTitle) {
         this.INVENTORY_TITLE = inventoryTitle;
@@ -46,7 +47,7 @@ public abstract class GUI implements InventoryHolder {
         ItemStack item = e.getCurrentItem();
         if (item != null && item.getType() != Material.AIR) {
             for (int i : this.getItems().keySet()) {
-                if (i == e.getSlot()) {
+                if (i == e.getRawSlot()) {
                     this.getItems().get(i).onClick(e);
                     e.setCancelled(true);
                     break;
@@ -57,10 +58,18 @@ public abstract class GUI implements InventoryHolder {
 
     public void onOpen() {
         registerButtons();
-        this.getItems().forEach((slot, btn) -> {
+        for (int slot : this.getItems().keySet()) {
+            Behaviour btn = this.getItems().get(slot);
+            if (this.getInventory().getSize() < slot) {
+                console.errorMsg("&cThere was an error when trying to load the item: "
+                        + btn.getItem().getItemMeta().getDisplayName()
+                        + " because the slot defined (" + slot + ") is greather than the inventory size "
+                        + "(" + this.getInventory().getSize() + ").");
+                continue;
+            }
             this.getInventory().setItem(slot, btn.getItem());
             btn.onLoad();
-        });
+        }
     }
 
     public abstract void onClose(InventoryCloseEvent e);

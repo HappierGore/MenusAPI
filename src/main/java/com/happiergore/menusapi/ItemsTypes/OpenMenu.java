@@ -1,7 +1,6 @@
 package com.happiergore.menusapi.ItemsTypes;
 
 import com.happiergore.menusapi.GUI;
-import com.happiergore.menusapi.ItemGUI;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
