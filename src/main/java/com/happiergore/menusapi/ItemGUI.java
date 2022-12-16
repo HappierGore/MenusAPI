@@ -43,17 +43,6 @@ public abstract class ItemGUI {
         this.item = item;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("ItemGUI{");
-        sb.append("inventory=").append(inventory);
-        sb.append(", item=").append(item);
-        sb.append(", memory=").append(super.toString());
-        sb.append('}');
-        return sb.toString();
-    }
-
     public void update() {
         this.loadMainItem();
     }

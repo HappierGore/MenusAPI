@@ -24,8 +24,8 @@ public abstract class GUI implements InventoryHolder {
     //***************
     private Inventory inventory;
     private final Map<Integer, Behaviour> items = new HashMap<>();
-    private final PlayerUtils player;
-    public final String INVENTORY_TITLE;
+    private PlayerUtils player;
+    public String INVENTORY_TITLE;
     private final ConsoleUtils console = new ConsoleUtils();
 
     public GUI(Player player, String inventoryTitle) {
@@ -45,7 +45,8 @@ public abstract class GUI implements InventoryHolder {
 
     public void onInventoryClick(InventoryClickEvent e) {
         ItemStack item = e.getCurrentItem();
-        if (item != null && item.getType() != Material.AIR) {
+        if (item != null) {
+            //i = Slot (map with slot and item)
             for (int i : this.getItems().keySet()) {
                 if (i == e.getRawSlot()) {
                     this.getItems().get(i).onClick(e);
@@ -99,6 +100,10 @@ public abstract class GUI implements InventoryHolder {
     @Override
     public Inventory getInventory() {
         return this.inventory;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = new PlayerUtils(player);
     }
 
     public void setInventory(Inventory inventory) {
