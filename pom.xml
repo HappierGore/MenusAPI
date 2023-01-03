@@ -5,7 +5,7 @@
     <artifactId>MenusAPI</artifactId>
     <version>1.0</version>
     <properties>
-        <java.version>8</java.version>
+        <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     
@@ -38,9 +38,7 @@
             <url>https://jitpack.io</url>
         </repository>
     </repositories>
-    
     <dependencies>
-        
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>

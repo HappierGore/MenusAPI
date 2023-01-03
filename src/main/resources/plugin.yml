@@ -1,0 +1,9 @@
+name: MenusAPI
+version: '${project.version}'
+main: com.happiergore.menusapi.main
+load: STARTUP
+loadbefore: [ NBTAPI ]
+depend: [ NBTAPI ]
+authors: [ HappierGore ]
+description: GUI API
+website: https://www.spigotmc.org/members/happiergore.1046101/
